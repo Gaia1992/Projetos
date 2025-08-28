@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Primeiro Servidor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            color: white;
+            animation: bgchange 10s infinite alternate;
+        }
+
+        /* Fundo com troca de cores */
+        @keyframes bgchange {
+            0% { background: #d8b4fe; }   /* lilás */
+            25% { background: #f472b6; }  /* rosa */
+            50% { background: #9333ea; }  /* roxo */
+            75% { background: #facc15; }  /* amarelo */
+            100% { background: #ec4899; } /* rosa forte */
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.4);
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        h1, p {
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Confetes */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            top: -10px;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0.7;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>✨ Meu nome é Vivian ✨</h1>
+        <p>Esse é meu primeiro servidor 🎉🚀</p>
+    </div>
+
+    <script>
+        function createConfetti() {
+            const confetti = document.createElement("div");
+            confetti.classList.add("confetti");
+            document.body.appendChild(confetti);
+
+            // cores aleatórias
+            const colors = ["#f472b6", "#d8b4fe", "#9333ea", "#facc15", "#ec4899", "#22d3ee", "#34d399"];
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+            // posição aleatória
+            confetti.style.left = Math.random() * window.innerWidth + "px";
+
+            // tamanho aleatório
+            const size = Math.random() * 8 + 5;
+            confetti.style.width = size + "px";
+            confetti.style.height = size + "px";
+
+            // duração aleatória
+            confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+            // remove depois de cair
+            setTimeout(() => { confetti.remove(); }, 5000);
+        }
+
+        // cria confetes continuamente
+        setInterval(createConfetti, 200);
+    </script>
+</body>
+</html>
