@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Nova Movimentação{% endblock %}
+{% block content %}
+<h3 class='mb-3'>Nova Movimentação</h3>
+<form method='post'>{{ form.hidden_tag() }}
+<div class='mb-3'>{{ form.product_id.label(class='form-label') }} {{ form.product_id(class='form-select') }}</div>
+<div class='mb-3'>{{ form.type.label(class='form-label') }} {{ form.type(class='form-select') }}</div>
+<div class='mb-3'>{{ form.quantity.label(class='form-label') }} {{ form.quantity(class='form-control', min=1) }}</div>
+<div class='mb-3'>{{ form.note.label(class='form-label') }} {{ form.note(class='form-control', rows='3') }}</div>
+{{ form.submit(class='btn btn-primary') }} <a class='btn btn-secondary' href='{{ url_for('main.movements') }}'>Voltar</a>
+</form>
+{% endblock %}

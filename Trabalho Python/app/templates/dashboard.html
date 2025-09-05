@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h3 class='mb-3'>Dashboard</h3>
+{% if low_stock %}<div class='alert alert-warning'><strong>Atenção:</strong> Produtos com estoque abaixo do mínimo.</div>{% endif %}
+<table class='table table-striped'><thead><tr><th>Produto</th><th>SKU</th><th>Quantidade</th><th>Mínimo</th><th>Preço</th></tr></thead>
+<tbody>{% for p in products %}<tr class='{% if p.quantity < p.min_quantity %}table-warning{% endif %}'>
+<td>{{ p.name }}</td><td>{{ p.sku or '-' }}</td><td>{{ p.quantity }}</td><td>{{ p.min_quantity }}</td><td>R$ {{ '%.2f'|format(p.price) }}</td>
+</tr>{% endfor %}</tbody></table>
+{% endblock %}

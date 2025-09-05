@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Movimentações{% endblock %}
+{% block content %}
+<div class='d-flex justify-content-between align-items-center mb-3'><h3>Movimentações</h3>
+<a class='btn btn-primary' href='{{ url_for('main.movement_new') }}'>Nova Movimentação</a></div>
+<table class='table table-striped'><thead><tr><th>Data/Hora</th><th>Produto</th><th>Tipo</th><th>Quantidade</th><th>Usuário</th><th>Observação</th></tr></thead>
+<tbody>{% for m in records %}<tr><td>{{ m.timestamp.strftime('%d/%m/%Y %H:%M') }}</td><td>{{ m.product.name }}</td>
+<td>{{ 'Entrada' if m.type == 'in' else 'Saída' }}</td><td>{{ m.quantity }}</td><td>{{ m.user.username if m.user else '-' }}</td><td>{{ m.note or '-' }}</td></tr>{% endfor %}</tbody></table>
+{% endblock %}

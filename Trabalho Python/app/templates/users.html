@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Usuários{% endblock %}
+{% block content %}
+<h3 class='mb-3'>Gerenciar Usuários</h3>
+<form method='post' class='mb-4'>{{ form.hidden_tag() }}
+<div class='row g-2'><div class='col-md-3'>{{ form.username.label(class='form-label') }} {{ form.username(class='form-control') }}</div>
+<div class='col-md-3'>{{ form.password.label(class='form-label') }} {{ form.password(class='form-control') }}</div>
+<div class='col-md-3'>{{ form.role.label(class='form-label') }} {{ form.role(class='form-select') }}</div>
+<div class='col-md-3 d-flex align-items-end'>{{ form.submit(class='btn btn-primary w-100') }}</div></div></form>
+<table class='table table-hover'><thead><tr><th>Usuário</th><th>Perfil</th><th>Criado em</th></tr></thead>
+<tbody>{% for u in all_users %}<tr><td>{{ u.username }}</td><td>{{ 'Administrador' if u.role=='admin' else 'Comum' }}</td><td>{{ u.created_at.strftime('%d/%m/%Y %H:%M') }}</td></tr>{% endfor %}</tbody></table>
+{% endblock %}

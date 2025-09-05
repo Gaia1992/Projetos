@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<h3 class='mb-3'>{{ title }}</h3>
+<form method='post'>{{ form.hidden_tag() }}
+<div class='row'><div class='col-md-6 mb-3'>{{ form.name.label(class='form-label') }} {{ form.name(class='form-control') }}</div>
+<div class='col-md-3 mb-3'>{{ form.sku.label(class='form-label') }} {{ form.sku(class='form-control') }}</div>
+<div class='col-md-3 mb-3'>{{ form.price.label(class='form-label') }} {{ form.price(class='form-control', step='0.01') }}</div></div>
+<div class='row'><div class='col-md-4 mb-3'>{{ form.quantity.label(class='form-label') }} {{ form.quantity(class='form-control', min=0) }}</div>
+<div class='col-md-4 mb-3'>{{ form.min_quantity.label(class='form-label') }} {{ form.min_quantity(class='form-control', min=0) }}</div></div>
+<div class='mb-3'>{{ form.description.label(class='form-label') }} {{ form.description(class='form-control', rows='3') }}</div>
+{{ form.submit(class='btn btn-primary') }} <a class='btn btn-secondary' href='{{ url_for('main.products') }}'>Voltar</a>
+</form>
+{% endblock %}

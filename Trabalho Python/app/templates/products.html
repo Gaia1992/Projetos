@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Produtos{% endblock %}
+{% block content %}
+<div class='d-flex justify-content-between align-items-center mb-3'><h3>Produtos</h3>
+{% if current_user.role == 'admin' %}<a class='btn btn-primary' href='{{ url_for('main.product_new') }}'>Novo Produto</a>{% endif %}</div>
+<table class='table table-hover align-middle'><thead><tr><th>Nome</th><th>SKU</th><th>Quantidade</th><th>Mínimo</th><th>Preço</th><th>Ações</th></tr></thead>
+<tbody>{% for p in items %}<tr class='{% if p.quantity < p.min_quantity %}table-warning{% endif %}'>
+<td>{{ p.name }}</td><td>{{ p.sku or '-' }}</td><td>{{ p.quantity }}</td><td>{{ p.min_quantity }}</td><td>R$ {{ '%.2f'|format(p.price) }}</td>
+<td>{% if current_user.role == 'admin' %}
+<a class='btn btn-sm btn-outline-secondary' href='{{ url_for('main.product_edit', pid=p.id) }}'>Editar</a>
+<form class='d-inline' method='post' action='{{ url_for('main.product_delete', pid=p.id) }}' onsubmit="return confirm('Excluir este produto?');">
+<button class='btn btn-sm btn-outline-danger' type='submit'>Excluir</button></form>
+{% else %}-{% endif %}</td></tr>{% endfor %}</tbody></table>
+{% endblock %}
